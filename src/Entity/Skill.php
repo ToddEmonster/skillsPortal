@@ -20,11 +20,6 @@ class Skill
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $idSkill;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $label;
@@ -42,18 +37,6 @@ class Skill
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdSkill(): ?int
-    {
-        return $this->idSkill;
-    }
-
-    public function setIdSkill(int $idSkill): self
-    {
-        $this->idSkill = $idSkill;
-
-        return $this;
     }
 
     public function getLabel(): ?string

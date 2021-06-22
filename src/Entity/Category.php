@@ -20,11 +20,6 @@ class Category
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $idCategory;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $label;
@@ -42,18 +37,6 @@ class Category
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdCategory(): ?int
-    {
-        return $this->idCategory;
-    }
-
-    public function setIdCategory(int $idCategory): self
-    {
-        $this->idCategory = $idCategory;
-
-        return $this;
     }
 
     public function getLabel(): ?string

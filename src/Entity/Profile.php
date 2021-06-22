@@ -20,11 +20,6 @@ class Profile
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $idProfile;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $firstName;
@@ -109,18 +104,6 @@ class Profile
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdProfile(): ?int
-    {
-        return $this->idProfile;
-    }
-
-    public function setIdProfile(int $idProfile): self
-    {
-        $this->idProfile = $idProfile;
-
-        return $this;
     }
 
     public function getFirstName(): ?string

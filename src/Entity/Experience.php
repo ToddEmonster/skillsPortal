@@ -18,11 +18,6 @@ class Experience
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $idExperience;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $jobTitle;
@@ -57,18 +52,6 @@ class Experience
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdExperience(): ?int
-    {
-        return $this->idExperience;
-    }
-
-    public function setIdExperience(int $idExperience): self
-    {
-        $this->idExperience = $idExperience;
-
-        return $this;
     }
 
     public function getJobTitle(): ?string

@@ -18,11 +18,6 @@ class Company
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $idCompany;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $name;
@@ -50,18 +45,6 @@ class Company
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdCompany(): ?int
-    {
-        return $this->idCompany;
-    }
-
-    public function setIdCompany(int $idCompany): self
-    {
-        $this->idCompany = $idCompany;
-
-        return $this;
     }
 
     public function getName(): ?string
