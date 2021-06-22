@@ -47,4 +47,15 @@ class ProfileRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findOneByUser(int $userId): ?Profile
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.user = :val')
+            ->setParameter('val', $userId)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
 }
