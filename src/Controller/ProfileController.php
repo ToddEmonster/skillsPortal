@@ -48,7 +48,7 @@ class ProfileController extends AbstractController
 
         return $this->render('profile/my_profile.html.twig', [
             'controller_name' => 'ProfileController',
-            'profile_name' => $profile->getFirstName() . ' ' . $profile->getLastName()
+            'profile' => $profile
         ]);
     }
 

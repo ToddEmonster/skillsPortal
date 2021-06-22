@@ -74,14 +74,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @deprecated since Symfony 5.3, use getUserIdentifier instead
-     */
-    public function getUsername(): string
-    {
-        return (string) $this->username;
-    }
-
-    /**
      * @see UserInterface
      */
     public function getRoles(): array
@@ -150,6 +142,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->profile = $profile;
 
         return $this;
+    }
+
+    /**
+     * @deprecated since Symfony 5.3, use getUserIdentifier instead
+     */
+    public function getUsername(): string
+    {
+        return (string) $this->username;
     }
 
     public function setUsername(string $username): self

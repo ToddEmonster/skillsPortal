@@ -1,5 +1,47 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <p>Profile of {{ profile_name }}</p>
+    <section class="main-content">
+        <header>
+            <img src="" alt="" class="logo">
+            <div class="search-bar"></div>
+            <div class="logout">
+                {% if app.user %}
+                    <div class="mb-3">
+                        {{ app.user.username }} (<a href="{{ path('app_logout') }}">Logout</a>)
+                    </div>
+                {% endif %}
+            </div>
+        </header>
+        <h1>Profil</h1>
+        <section class="info-main">
+{#            <img src="" alt="">#}
+            <ul>
+                <li class="profile-info">
+                    <h2>{{ profile.getFirstName() }} {{ profile.getLastName() }}</h2>
+                </li>
+                <li class="profile-info">
+                    <h3>{{ profile.getJobtitle() }}</h3>
+                </li>
+                <li class="profile-info">Adresse</li>
+                <li class="profile-info">Code postal</li>
+                <li class="profile-info">Ville</li>
+                <li class="profile-info">Email</li>
+                <li class="profile-info">Telephone</li>
+                <li class="profile-info">Compétences principales</li>
+            </ul>
+        </section>
+        <section class="info-details">
+            <nav>
+                <ul>
+                    <li>Compétences</li>
+                    <li>Historique des missions</li>
+                    <li>Fichiers</li>
+                </ul>
+            </nav>
+            <div class="info-details"></div>
+        </section>
+    </section>
+    <nav class="sidenav"></nav>
+
 {% endblock %}
