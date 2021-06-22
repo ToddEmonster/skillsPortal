@@ -19,26 +19,30 @@ class ProfileController extends AbstractController
     }
 
     /**
-     * @Route("/profile/all", name="all_profiles")
+     * @Route(
+     *     "/profile", "/profiles",
+     *     name="profiles"
+     * )
      */
     public function index(): Response
     {
-        $profile = $this->entityManager->getRepository(Profile::class)->findAll();
+        $profiles = $this->entityManager->getRepository(Profile::class)->findAll();
 
         return $this->render('profile/index.html.twig', [
             'controller_name' => 'ProfileController',
+            'profiles' => $profiles
         ]);
     }
 
     /**
      * @Route(
      *     "/profile/{id}",
-     *     name="my_profile",
+     *     name="single_profile",
      *     methods={"GET"},
      *     requirements={"id"="\d+"}
      * )
      */
-    public function read(int $id = 1): Response
+    public function read(int $id): Response
     {
         $profile = $this->entityManager->getRepository(Profile::class)->findOneByUser($id);
 
