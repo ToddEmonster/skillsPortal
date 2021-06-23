@@ -6,6 +6,7 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -20,6 +21,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $id;
 
     /**
+     * @Assert\NotBlank(
+     *     message = "Veuillez saisir une adresse mail."
+     * )
+     * @Assert\Email(
+     *     message = "Le mail '{{ value }}' n'est pas un mail valide."
+     * )
      * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
@@ -31,6 +38,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @var string The hashed password
+     * @Assert\NotBlank
      * @ORM\Column(type="string")
      */
     private $password;
@@ -47,11 +55,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $username;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 50,
+     *      minMessage = "Votre nom doit être d'au moins {{ limit }} caractères de long",
+     *      maxMessage = "Votre nom ne doit pas faire plus de {{ limit }} caractères de long"
+     * )
      * @ORM\Column(type="string", length=255)
      */
     private $firstname;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 50,
+     *      minMessage = "Votre prénom doit être d'au moins {{ limit }} caractères de long",
+     *      maxMessage = "Votre prénom ne doit pas faire plus de {{ limit }} caractères de long"
+     * )
      * @ORM\Column(type="string", length=255)
      */
     private $lastname;
