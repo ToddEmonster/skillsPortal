@@ -32,7 +32,7 @@ class RegisterController extends AbstractController
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index(Request $request, UserPasswordHasherInterface $passwordEncoder): Response
+    public function index(Request $request, UserPasswordHasherInterface $passwordHasher): Response
     {
         // Si l'utilisateur est déjà connecté
         if ($this->getUser()) {
@@ -47,8 +47,11 @@ class RegisterController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
 
+            // Donner le role user par défaut
+            $user->setRoles(["ROLE_USER"]);
+
             // Encoder le mot de passe
-            $user->setPassword($passwordEncoder->encodePassword($user, $user->getPassword()));
+            $user->setPassword($passwordHasher->hashPassword($user, $user->getPassword()));
 
             $this->entityManager->persist($user);
             $this->entityManager->flush();
