@@ -8,7 +8,7 @@
             <div class="logout">
                 {% if app.user %}
                     <div class="mb-3">
-                        {{ app.user.username }} (<a href="{{ path('app_logout') }}">Logout</a>)
+                        {{ app.user.firstname ~ ~ app.user.lastname }} (<a href="{{ path('app_logout') }}">Logout</a>)
                     </div>
                 {% endif %}
             </div>
