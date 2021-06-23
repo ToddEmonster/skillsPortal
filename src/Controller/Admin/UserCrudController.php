@@ -23,6 +23,7 @@ class UserCrudController extends AbstractCrudController
         return [
             IdField::new('id')->onlyOnIndex(),
             EmailField::new('email'),
+            TextField::new('password')->onlyWhenCreating(),
             TextField::new('username'),
             ArrayField::new('roles'),
             AssociationField::new('profile')->onlyOnIndex(),

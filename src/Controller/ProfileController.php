@@ -5,11 +5,19 @@ namespace App\Controller;
 use App\Entity\Profile;
 use App\Form\ProfileType;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class ProfileController
+ *
+ * @IsGranted("ROLE_USER")
+ *
+ * @package App\Controller
+ */
 class ProfileController extends AbstractController
 {
     private EntityManagerInterface $entityManager;
@@ -19,8 +27,9 @@ class ProfileController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_STRUCT")
      * @Route(
-     *     "/profile", "/profiles",
+     *     "/profiles",
      *     name="profiles"
      * )
      */
