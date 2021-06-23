@@ -50,11 +50,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $profile;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
-     */
-    private $username;
-
-    /**
      * @Assert\NotBlank
      * @Assert\Length(
      *      min = 2,
@@ -181,14 +176,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->username;
-    }
-
-    public function setUsername(string $username): self
-    {
-        $this->username = $username;
-
-        return $this;
+        return (string) $this->email;
     }
 
     public function getFirstname(): ?string
