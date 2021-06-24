@@ -6,6 +6,7 @@ use App\Entity\Profile;
 use App\Entity\User;
 use App\Form\ProfileType;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,8 +35,9 @@ class ProfileController extends AbstractController
      *     name="profiles"
      * )
      */
-    public function index(): Response
+    public function index(LoggerInterface $logger): Response
     {
+        $logger->info('Look! I just used a service');
         $profiles = $this->entityManager->getRepository(Profile::class)->findAll();
 
         return $this->render('profile/profiles.html.twig', [
@@ -54,6 +56,7 @@ class ProfileController extends AbstractController
      */
     public function read(int $id): Response
     {
+        // id is the USER id not the PROFILE id
         $profile = $this->entityManager->getRepository(Profile::class)->findOneByUser($id);
 
         return $this->render('profile/my_profile.html.twig', [
@@ -67,8 +70,10 @@ class ProfileController extends AbstractController
      */
     public function new(Request $request): Response
     {
-        $userEmail = $this->getUser()->getUserIdentifier();
-        $user = $this->entityManager->getRepository(User::class)->findOneBy(["email" => $userEmail]);
+        /**@var User $user */
+        $user = $this->getUser();
+//        $userEmail = $this->getUser()->getUserIdentifier();
+//        $user = $this->entityManager->getRepository(User::class)->findOneBy(["email" => $userEmail]);
 
         if ($user->hasProfile()) {
             return $this->redirectToRoute('home');
@@ -94,9 +99,12 @@ class ProfileController extends AbstractController
             $profile->setUser($user);
             
             $this->entityManager->persist($profile);
-            $this->entityManager->flush();
 
-            return $this->redirectToRoute('single_profile', ["id" => $user->getProfile()->getId()]);
+            // Update user profile
+            $user->setProfile($profile);
+
+            $this->entityManager->flush();
+            return $this->redirectToRoute('single_profile',["id" => $user->getId()]);
         }
 
         return $this->render(
