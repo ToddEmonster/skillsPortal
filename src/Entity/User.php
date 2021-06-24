@@ -171,6 +171,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function hasProfile(): bool
+    {
+        return (bool)$this->getProfile();
+    }
+
     /**
      * @deprecated since Symfony 5.3, use getUserIdentifier instead
      */

@@ -2,6 +2,8 @@
 
 namespace App\Security;
 
+use App\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,14 +20,16 @@ use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
 class Authenticator extends AbstractLoginFormAuthenticator
 {
+    private EntityManagerInterface $entityManager;
     use TargetPathTrait;
 
     public const LOGIN_ROUTE = 'app_login';
 
     private UrlGeneratorInterface $urlGenerator;
 
-    public function __construct(UrlGeneratorInterface $urlGenerator) {
+    public function __construct(UrlGeneratorInterface $urlGenerator, EntityManagerInterface $entityManager) {
         $this->urlGenerator = $urlGenerator;
+        $this->entityManager = $entityManager;
     }
 
     public function authenticate(Request $request): PassportInterface
@@ -45,11 +49,22 @@ class Authenticator extends AbstractLoginFormAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
-            return new RedirectResponse($targetPath);
-        }
+        // Si on veut rediriger vers la dernière page consultée avant login
+//        if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
+//            return new RedirectResponse($targetPath);
+//        }
 
-        $url = $this->urlGenerator->generate('home');
+        if (in_array("ROLE_STRUCT", $token->getRoleNames())) {
+            $url = $this->urlGenerator->generate('profiles');
+        } else {
+            $userEmail = $token->getUserIdentifier();
+            $user = $this->entityManager->getRepository(User::class)->findOneBy(["email" => $userEmail]);
+            if ($user->hasProfile()) {
+                $url = $this->urlGenerator->generate('single_profile', ['id' => $user->getProfile()->getId()]);
+            } else {
+                $url = $this->urlGenerator->generate('new_profile');
+            }
+        }
 
         return new RedirectResponse($url);
     }

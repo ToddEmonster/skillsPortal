@@ -19,6 +19,9 @@ class DashboardController extends AbstractDashboardController
      */
     public function index(): Response
     {
+        if ($this->getUser()->getRoles()) {
+            return $this->redirectToRoute('home');
+        }
         return parent::index();
     }
 
