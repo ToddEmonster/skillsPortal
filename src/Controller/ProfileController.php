@@ -46,6 +46,7 @@ class ProfileController extends AbstractController
         ]);
     }
 
+    // TODO : faire la route /profile, si User a un profile => go son profil, sinon créer un profil
     /**
      * @Route(
      *     "/profile/{id}",
@@ -70,7 +71,7 @@ class ProfileController extends AbstractController
      * @Route(
      *     "/profile/{id}/edit",
      *     name="profile_edit",
-     *     methods={"PUT"},
+     *     methods={"GET","PUT"},
      *     requirements={"id"="\d+"}
      * )
      */

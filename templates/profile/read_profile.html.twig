@@ -2,17 +2,8 @@
 
 {% block body %}
     <section class="main-content">
-        <header>
-            <img src="" alt="" class="logo">
-            <div class="search-bar"></div>
-            <div class="logout">
-                {% if app.user %}
-                    <div class="mb-3">
-                        {{ app.user.firstname ~ ' ' ~ app.user.lastname }} (<a href="{{ path('app_logout') }}">Logout</a>)
-                    </div>
-                {% endif %}
-            </div>
-        </header>
+
+        <a href="{{ path("profile_edit", {id: app.user.id}, false) }}">Editer le profil</a>
         <h1>Profil</h1>
         <section class="info-main">
 {#            <img src="" alt="">#}
