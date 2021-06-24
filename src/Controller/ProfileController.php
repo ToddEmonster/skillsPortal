@@ -37,7 +37,7 @@ class ProfileController extends AbstractController
     {
         $profiles = $this->entityManager->getRepository(Profile::class)->findAll();
 
-        return $this->render('profile/index.html.twig', [
+        return $this->render('profile/profiles.html.twig', [
             'controller_name' => 'ProfileController',
             'profiles' => $profiles
         ]);

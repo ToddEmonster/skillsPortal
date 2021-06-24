@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h2>Profils </h2>
+    {% for profile in profiles %}
+        <div style="border: solid blue 1px">
+            <h3>{{ profile.getFirstName() ~ ' ' ~ profile.getLastName() }}</h3>
+            <h4>{{ profile.getJobTitle() }}</h4>
+            <small>{{ profile.isCollaborator() ? "COLLABORATEUR•ICE" : "CANDIDAT•E" }}</small>
+        </div>
+    {% endfor %}
+{% endblock %}
