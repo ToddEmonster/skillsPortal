@@ -22,7 +22,7 @@ class ProfileType extends AbstractType
             ->add('postalCode')
             ->add('city')
             ->add('create_profile', SubmitType::class, [
-                'label' => 'Créer profil'
+                'label' => 'Mettre à jour le profil'
             ]);
         ;
     }

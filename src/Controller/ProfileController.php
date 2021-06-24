@@ -71,16 +71,15 @@ class ProfileController extends AbstractController
      * @Route(
      *     "/profile/{id}/edit",
      *     name="profile_edit",
-     *     methods={"GET","PUT"},
+     *     methods={"GET","POST"},
      *     requirements={"id"="\d+"}
      * )
      */
-    public function update(int $id, Request $request): Response
+    public function update(Request $request): Response
     {
         /**@var User $user */
         $user = $this->getUser();
 
-        // id is the USER id not the PROFILE id
         $profile = $user->getProfile();
 
         $form = $this->createForm(ProfileType::class, $profile);
@@ -89,15 +88,9 @@ class ProfileController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $profile = $form->getData();
-
             $profile->setLastEditDate(new \DateTime());
-            $profile->setIsCollaborator(false);
-            $profile->setUser($user);
 
             $this->entityManager->persist($profile);
-
-            // Update user profile
-            $user->setProfile($profile);
 
             $this->entityManager->flush();
 
