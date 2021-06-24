@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Profile;
+use App\Entity\User;
 use App\Form\ProfileType;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -66,8 +67,37 @@ class ProfileController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $userEmail = $this->getUser()->getUserIdentifier();
+        $user = $this->entityManager->getRepository(User::class)->findOneBy(["email" => $userEmail]);
+
+        if ($user->hasProfile()) {
+            return $this->redirectToRoute('home');
+        }
+
+//        if ($user->hasProfile()) {
+//            $url = $this->urlGenerator->generate('single_profile', ['id' => $user->getProfile()->getId()]);
+//        } else {
+//            $url = $this->urlGenerator->generate('new_profile');
+//        }
+
         $profile = new Profile();
         $form = $this->createForm(ProfileType::class, $profile);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $profile = $form->getData();
+
+            $profile->setCreationDate(new \DateTime());
+            $profile->setLastEditDate(new \DateTime());
+            $profile->setIsCollaborator(false);
+            $profile->setUser($user);
+            
+            $this->entityManager->persist($profile);
+            $this->entityManager->flush();
+
+            return $this->redirectToRoute('single_profile', ["id" => $user->getProfile()->getId()]);
+        }
 
         return $this->render(
             'profile/new.html.twig',

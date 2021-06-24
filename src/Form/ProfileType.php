@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Profile;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,12 +16,14 @@ class ProfileType extends AbstractType
             ->add('firstName')
             ->add('lastName')
             ->add('jobTitle')
-            ->add('position')
             ->add('email')
             ->add('tel')
             ->add('address')
             ->add('postalCode')
             ->add('city')
+            ->add('create_profile', SubmitType::class, [
+                'label' => 'Créer profil'
+            ]);
         ;
     }
 

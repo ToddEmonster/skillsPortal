@@ -6,6 +6,7 @@ use App\Repository\ProfileRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=ProfileRepository::class)
@@ -46,6 +47,7 @@ class Profile
 
     /**
      * @ORM\Column(type="datetime")
+     * @Gedmo\Timestampable(on="create")
      */
     private $creationDate;
 
@@ -99,6 +101,10 @@ class Profile
     {
         $this->experiences = new ArrayCollection();
         $this->skills = new ArrayCollection();
+//        $this->setCreationDate(new \DateTime());
+//        if ($this->getLastEditDate() == null) {
+//            $this->setLastEditDate(new \DateTime());
+//        }
     }
 
     public function getId(): ?int
