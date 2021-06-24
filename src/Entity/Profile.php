@@ -35,11 +35,6 @@ class Profile
     private $jobTitle;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $position;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $email;
@@ -95,6 +90,11 @@ class Profile
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isCollaborator;
+
     public function __construct()
     {
         $this->experiences = new ArrayCollection();
@@ -138,18 +138,6 @@ class Profile
     public function setJobTitle(string $jobTitle): self
     {
         $this->jobTitle = $jobTitle;
-
-        return $this;
-    }
-
-    public function getPosition(): ?int
-    {
-        return $this->position;
-    }
-
-    public function setPosition(int $position): self
-    {
-        $this->position = $position;
 
         return $this;
     }
@@ -318,6 +306,18 @@ class Profile
     public function setUser(User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getIsCollaborator(): ?bool
+    {
+        return $this->isCollaborator;
+    }
+
+    public function setIsCollaborator(bool $isCollaborator): self
+    {
+        $this->isCollaborator = $isCollaborator;
 
         return $this;
     }

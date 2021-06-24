@@ -17,6 +17,11 @@
         <section class="info-main">
 {#            <img src="" alt="">#}
             <ul>
+                <li>
+                    <strong><small>
+                            {{ profile.getIsCollaborator() ? "COLLABORATEUR•ICE" : "CANDIDAT•E"  }}
+                    </small></strong>
+                </li>
                 <li class="profile-info">
                     <h2>{{ profile.getFirstName() }} {{ profile.getLastName() }}</h2>
                 </li>
