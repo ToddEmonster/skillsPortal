@@ -75,14 +75,38 @@ class ProfileController extends AbstractController
      *     requirements={"id"="\d+"}
      * )
      */
-    public function update(int $id): Response
+    public function update(int $id, Request $request): Response
     {
+        /**@var User $user */
+        $user = $this->getUser();
+
         // id is the USER id not the PROFILE id
-        $profile = $this->entityManager->getRepository(Profile::class)->findOneByUser($id);
+        $profile = $user->getProfile();
+
+        $form = $this->createForm(ProfileType::class, $profile);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $profile = $form->getData();
+
+            $profile->setLastEditDate(new \DateTime());
+            $profile->setIsCollaborator(false);
+            $profile->setUser($user);
+
+            $this->entityManager->persist($profile);
+
+            // Update user profile
+            $user->setProfile($profile);
+
+            $this->entityManager->flush();
+
+            return $this->redirectToRoute('read_profile',["id" => $user->getId()]);
+        }
 
         return $this->render('profile/edit_profile.html.twig', [
-            'controller_name' => 'ProfileController',
-            'profile' => $profile
+            'profile' => $profile,
+            'edit_profile_form' => $form->createView()
         ]);
     }
 
@@ -93,18 +117,10 @@ class ProfileController extends AbstractController
     {
         /**@var User $user */
         $user = $this->getUser();
-//        $userEmail = $this->getUser()->getUserIdentifier();
-//        $user = $this->entityManager->getRepository(User::class)->findOneBy(["email" => $userEmail]);
 
         if ($user->hasProfile()) {
             return $this->redirectToRoute('home');
         }
-
-//        if ($user->hasProfile()) {
-//            $url = $this->urlGenerator->generate('read_profile', ['id' => $user->getProfile()->getId()]);
-//        } else {
-//            $url = $this->urlGenerator->generate('new_profile');
-//        }
 
         $profile = new Profile();
         $form = $this->createForm(ProfileType::class, $profile);
@@ -125,6 +141,7 @@ class ProfileController extends AbstractController
             $user->setProfile($profile);
 
             $this->entityManager->flush();
+
             return $this->redirectToRoute('read_profile',["id" => $user->getId()]);
         }
 
