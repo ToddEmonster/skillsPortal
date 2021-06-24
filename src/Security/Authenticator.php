@@ -60,7 +60,7 @@ class Authenticator extends AbstractLoginFormAuthenticator
             $userEmail = $token->getUserIdentifier();
             $user = $this->entityManager->getRepository(User::class)->findOneBy(["email" => $userEmail]);
             if ($user->hasProfile()) {
-                $url = $this->urlGenerator->generate('single_profile', ['id' => $user->getProfile()->getId()]);
+                $url = $this->urlGenerator->generate('read_profile', ['id' => $user->getProfile()->getId()]);
             } else {
                 $url = $this->urlGenerator->generate('new_profile');
             }

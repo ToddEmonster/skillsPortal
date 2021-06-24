@@ -49,7 +49,7 @@ class ProfileController extends AbstractController
     /**
      * @Route(
      *     "/profile/{id}",
-     *     name="single_profile",
+     *     name="read_profile",
      *     methods={"GET"},
      *     requirements={"id"="\d+"}
      * )
@@ -59,7 +59,27 @@ class ProfileController extends AbstractController
         // id is the USER id not the PROFILE id
         $profile = $this->entityManager->getRepository(Profile::class)->findOneByUser($id);
 
-        return $this->render('profile/my_profile.html.twig', [
+        return $this->render(
+            'profile/read_profile.html.twig', [
+            'controller_name' => 'ProfileController',
+            'profile' => $profile
+        ]);
+    }
+
+    /**
+     * @Route(
+     *     "/profile/{id}/edit",
+     *     name="profile_edit",
+     *     methods={"PUT"},
+     *     requirements={"id"="\d+"}
+     * )
+     */
+    public function update(int $id): Response
+    {
+        // id is the USER id not the PROFILE id
+        $profile = $this->entityManager->getRepository(Profile::class)->findOneByUser($id);
+
+        return $this->render('profile/edit_profile.html.twig', [
             'controller_name' => 'ProfileController',
             'profile' => $profile
         ]);
@@ -80,7 +100,7 @@ class ProfileController extends AbstractController
         }
 
 //        if ($user->hasProfile()) {
-//            $url = $this->urlGenerator->generate('single_profile', ['id' => $user->getProfile()->getId()]);
+//            $url = $this->urlGenerator->generate('read_profile', ['id' => $user->getProfile()->getId()]);
 //        } else {
 //            $url = $this->urlGenerator->generate('new_profile');
 //        }
@@ -104,11 +124,11 @@ class ProfileController extends AbstractController
             $user->setProfile($profile);
 
             $this->entityManager->flush();
-            return $this->redirectToRoute('single_profile',["id" => $user->getId()]);
+            return $this->redirectToRoute('read_profile',["id" => $user->getId()]);
         }
 
         return $this->render(
-            'profile/new.html.twig',
+            'create_profile.html.twig',
             ['form' => $form->createView()]
         );
     }
