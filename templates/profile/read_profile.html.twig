@@ -1,5 +1,10 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('read_profile') }}
+{% endblock %}
+
 {% block body %}
     <section class="main-content">
 
@@ -19,12 +24,36 @@
                 <li class="profile-info">
                     <h3>{{ profile.getJobtitle() }}</h3>
                 </li>
-                <li class="profile-info">Adresse</li>
-                <li class="profile-info">Code postal</li>
-                <li class="profile-info">Ville</li>
-                <li class="profile-info">Email</li>
-                <li class="profile-info">Telephone</li>
-                <li class="profile-info">Compétences principales</li>
+                <li class="profile-info">
+                    <span class="profile-field__label">Adresse</span><br />
+                    <span class="profile-field__content address">{{ profile.getAddress() }}</span>
+                </li>
+                <li class="profile-info">
+                    <span class="profile-field__label">Code postal</span><br />
+                    <span class="profile-field__content postal-code">{{ profile.getPostalCode() }}</span>
+                </li>
+                <li class="profile-info">
+                    <span class="profile-field__label">Ville</span><br />
+                    <span class="profile-field__content city">{{ profile.getCity() }}</span>
+                </li>
+                <li class="profile-info">
+                    <span class="profile-field__label">Email</span><br />
+                    <span class="profile-field__content email">{{ profile.getEmail() }}</span>
+                </li>
+                <li class="profile-info">
+                    <span class="profile-field__label">Telephone</span><br />
+                    <span class="profile-field__content tel">{{ profile.getTel() }}</span>
+                </li>
+                <li class="profile-info">
+                    <span class="profile-field__label">Compétences principales</span><br />
+                    <span class="profile-field__content main-skills">
+                        <span class="tag">python</span>
+                        <span class="tag">PHP</span>
+                        <span class="tag">Symfony</span>
+                        <span class="tag">React</span>
+                        <span class="tag">Angular</span>
+                    </span>
+                </li>
             </ul>
         </section>
         <section class="info-details">
