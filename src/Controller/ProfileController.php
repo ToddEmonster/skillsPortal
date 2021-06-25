@@ -2,11 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Experience;
 use App\Entity\Profile;
 use App\Entity\User;
 use App\Form\ProfileType;
 use Doctrine\ORM\EntityManagerInterface;
-use Psr\Log\LoggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,7 +37,6 @@ class ProfileController extends AbstractController
      */
     public function index(LoggerInterface $logger): Response
     {
-        $logger->info('Look! I just used a service');
         $profiles = $this->entityManager->getRepository(Profile::class)->findAll();
 
         return $this->render('profile/profiles.html.twig', [
@@ -46,7 +45,6 @@ class ProfileController extends AbstractController
         ]);
     }
 
-    // TODO : faire la route /profile, si User a un profile => go son profil, sinon créer un profil
     /**
      * @Route(
      *     "/profile/{id}",
@@ -59,11 +57,13 @@ class ProfileController extends AbstractController
     {
         // id is the USER id not the PROFILE id
         $profile = $this->entityManager->getRepository(Profile::class)->findOneByUser($id);
+        $experiences = $this->entityManager->getRepository(Experience::class)->findBy(["profile"=>$profile]);
 
         return $this->render(
             'profile/read_profile.html.twig', [
             'controller_name' => 'ProfileController',
-            'profile' => $profile
+            'profile' => $profile,
+            'experiences' => $experiences,
         ]);
     }
 
