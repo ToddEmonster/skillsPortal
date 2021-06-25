@@ -1,11 +1,24 @@
 .main-content {
     height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.button__edit-profile {
+    background-color: midnightblue;
+    color: white !important;
+    margin-bottom: 1rem;
+    padding: .75rem 2rem;
+    text-align: center;
+    border-radius: 1rem;
+    width: max-content;
 }
 
 .profile-content {
     display: flex;
     height: 100%;
-
+    border: solid 1px saddlebrown;
+    border-radius: .2rem;
     > * {
         padding: 1rem;
     }
@@ -15,11 +28,26 @@
     flex-grow: 2;
 }
 
-.profile-field__label {
-    color: darkred;
+.profile-info {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+.profile-info.banner {
+    background-color: darkred;
+    color: white;
+    margin: 1rem 0;
+    padding: .5rem;
+    text-align: center;
+    border-radius: 2rem;
 }
 
-.profile-field__content {
+.profile-field__label {
+    color: darkred;
+    margin-bottom: .5rem;
+}
+
+.profile-field__content:not(.main-skills) {
     display: inline-block;
     border-radius: .5rem;
     background-color: wheat;
@@ -34,4 +62,11 @@ nav.profile_linked_info ul {
     > * {
         margin-right: 2rem;
     }
+}
+
+.main-skills .tag {
+    margin: 0 .3rem;
+    padding: .3rem .5rem;
+    background-color: #363636;
+    color: white;
 }

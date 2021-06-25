@@ -8,14 +8,13 @@
 {% block body %}
     <section class="main-content">
 
-        <a href="{{ path("profile_edit", {id: app.user.id}, false) }}">Editer le profil</a>
+        <a class="button__edit-profile" href="{{ path("profile_edit", {id: app.user.id}, false) }}">Editer le profil</a>
         <div class="profile-content">
             <div class="info-main">
                 <h2>{{ profile.getFirstName() }} {{ profile.getLastName() }}</h2>
-
                 {#            <img src="" alt="">#}
                 <ul>
-                    <li>
+                    <li class="profile-info banner">
                         <strong><small>
                                 {{ profile.getIsCollaborator() ? "COLLABORATEUR•ICE" : "CANDIDAT•E" }}
                         </small></strong>
@@ -24,34 +23,34 @@
                         <h4>{{ profile.getJobtitle() }}</h4>
                     </li>
                     <li class="profile-info">
-                        <span class="profile-field__label">Adresse</span><br />
+                        <span class="profile-field__label">Adresse</span>
                         <span class="profile-field__content address">{{ profile.getAddress() }}</span>
                     </li>
                     <li class="profile-info">
-                        <span class="profile-field__label">Code postal</span><br />
+                        <span class="profile-field__label">Code postal</span>
                         <span class="profile-field__content postal-code">{{ profile.getPostalCode() }}</span>
                     </li>
                     <li class="profile-info">
-                        <span class="profile-field__label">Ville</span><br />
+                        <span class="profile-field__label">Ville</span>
                         <span class="profile-field__content city">{{ profile.getCity() }}</span>
                     </li>
                     <li class="profile-info">
-                        <span class="profile-field__label">Email</span><br />
+                        <span class="profile-field__label">Email</span>
                         <span class="profile-field__content email">{{ profile.getEmail() }}</span>
                     </li>
                     <li class="profile-info">
-                        <span class="profile-field__label">Telephone</span><br />
+                        <span class="profile-field__label">Telephone</span>
                         <span class="profile-field__content tel">{{ profile.getTel() }}</span>
                     </li>
                     <li class="profile-info">
-                        <span class="profile-field__label">Compétences principales</span><br />
-                        <span class="profile-field__content main-skills">
+                        <span class="profile-field__label">Compétences principales</span>
+                        <div class="profile-field__content main-skills">
                             <span class="tag">python</span>
                             <span class="tag">PHP</span>
                             <span class="tag">Symfony</span>
                             <span class="tag">React</span>
                             <span class="tag">Angular</span>
-                        </span>
+                        </div>
                     </li>
                 </ul>
             </div>
