@@ -9,63 +9,64 @@
     <section class="main-content">
 
         <a href="{{ path("profile_edit", {id: app.user.id}, false) }}">Editer le profil</a>
-        <h1>Profil</h1>
-        <section class="info-main">
-{#            <img src="" alt="">#}
-            <ul>
-                <li>
-                    <strong><small>
-                            {{ profile.getIsCollaborator() ? "COLLABORATEUR•ICE" : "CANDIDAT•E" }}
-                    </small></strong>
-                </li>
-                <li class="profile-info">
-                    <h2>{{ profile.getFirstName() }} {{ profile.getLastName() }}</h2>
-                </li>
-                <li class="profile-info">
-                    <h3>{{ profile.getJobtitle() }}</h3>
-                </li>
-                <li class="profile-info">
-                    <span class="profile-field__label">Adresse</span><br />
-                    <span class="profile-field__content address">{{ profile.getAddress() }}</span>
-                </li>
-                <li class="profile-info">
-                    <span class="profile-field__label">Code postal</span><br />
-                    <span class="profile-field__content postal-code">{{ profile.getPostalCode() }}</span>
-                </li>
-                <li class="profile-info">
-                    <span class="profile-field__label">Ville</span><br />
-                    <span class="profile-field__content city">{{ profile.getCity() }}</span>
-                </li>
-                <li class="profile-info">
-                    <span class="profile-field__label">Email</span><br />
-                    <span class="profile-field__content email">{{ profile.getEmail() }}</span>
-                </li>
-                <li class="profile-info">
-                    <span class="profile-field__label">Telephone</span><br />
-                    <span class="profile-field__content tel">{{ profile.getTel() }}</span>
-                </li>
-                <li class="profile-info">
-                    <span class="profile-field__label">Compétences principales</span><br />
-                    <span class="profile-field__content main-skills">
-                        <span class="tag">python</span>
-                        <span class="tag">PHP</span>
-                        <span class="tag">Symfony</span>
-                        <span class="tag">React</span>
-                        <span class="tag">Angular</span>
-                    </span>
-                </li>
-            </ul>
-        </section>
-        <section class="info-details">
-            <nav>
+        <div class="profile-content">
+            <div class="info-main">
+                <h2>{{ profile.getFirstName() }} {{ profile.getLastName() }}</h2>
+
+                {#            <img src="" alt="">#}
                 <ul>
-                    <li>Compétences</li>
-                    <li>Historique des missions</li>
-                    <li>Fichiers</li>
+                    <li>
+                        <strong><small>
+                                {{ profile.getIsCollaborator() ? "COLLABORATEUR•ICE" : "CANDIDAT•E" }}
+                        </small></strong>
+                    </li>
+                    <li class="profile-info">
+                        <h4>{{ profile.getJobtitle() }}</h4>
+                    </li>
+                    <li class="profile-info">
+                        <span class="profile-field__label">Adresse</span><br />
+                        <span class="profile-field__content address">{{ profile.getAddress() }}</span>
+                    </li>
+                    <li class="profile-info">
+                        <span class="profile-field__label">Code postal</span><br />
+                        <span class="profile-field__content postal-code">{{ profile.getPostalCode() }}</span>
+                    </li>
+                    <li class="profile-info">
+                        <span class="profile-field__label">Ville</span><br />
+                        <span class="profile-field__content city">{{ profile.getCity() }}</span>
+                    </li>
+                    <li class="profile-info">
+                        <span class="profile-field__label">Email</span><br />
+                        <span class="profile-field__content email">{{ profile.getEmail() }}</span>
+                    </li>
+                    <li class="profile-info">
+                        <span class="profile-field__label">Telephone</span><br />
+                        <span class="profile-field__content tel">{{ profile.getTel() }}</span>
+                    </li>
+                    <li class="profile-info">
+                        <span class="profile-field__label">Compétences principales</span><br />
+                        <span class="profile-field__content main-skills">
+                            <span class="tag">python</span>
+                            <span class="tag">PHP</span>
+                            <span class="tag">Symfony</span>
+                            <span class="tag">React</span>
+                            <span class="tag">Angular</span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="info-details">
+            <nav class="profile_linked_info">
+                <ul>
+                    <li><a>Compétences</a></li>
+                    <li><a>Historique des missions</a></li>
+                    <li><a>Fichiers</a></li>
                 </ul>
             </nav>
             <div class="info-details"></div>
-        </section>
+        </div>
+        </div>
     </section>
     <nav class="sidenav"></nav>
 

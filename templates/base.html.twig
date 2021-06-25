@@ -15,12 +15,35 @@
         {% endblock %}
     </head>
     <body>
-        {% if app.user %}
-            <div class="mb-3">
-                You are logged in as <i>{{ app.user.firstname ~ ' ' ~ app.user.lastname }}</i>,
-                <a href="{{ path('app_logout') }}">Logout</a>
+        <section class="sidebar_menu">
+            <h1>SkillsPortal</h1>
+            {% if is_granted('ROLE_STRUCT') %}
+                <h2>Tableau de bord</h2>
+            {% endif %}
+            {% if app.user and not is_granted('ROLE_STRUCT') %}
+                <h2>Mon profil</h2>
+            {% endif %}
+        </section>
+
+        <section class="page">
+            <header>
+                {% if app.user %}
+                    <form class="search-form">
+                        <input class="search-bar" placeholder="Rechercher..." />
+                        <input type="submit" value="Rechercher">
+                    </form>
+                    <span>
+                        <i>{{ app.user.firstname ~ ' ' ~ app.user.lastname }}</i>
+                        &nbsp;||&nbsp;
+                        <a href="{{ path('app_logout') }}">Déconnexion</a>
+                    </span>
+                {% endif %}
+            </header>
+
+            <div class="page__content">
+                {% block body %}{% endblock %}
             </div>
-        {% endif %}
-        {% block body %}{% endblock %}
+        </section>
+
     </body>
 </html>

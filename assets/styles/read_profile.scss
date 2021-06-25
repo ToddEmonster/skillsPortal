@@ -1,0 +1,37 @@
+.main-content {
+    height: 100%;
+}
+
+.profile-content {
+    display: flex;
+    height: 100%;
+
+    > * {
+        padding: 1rem;
+    }
+}
+
+.info-details {
+    flex-grow: 2;
+}
+
+.profile-field__label {
+    color: darkred;
+}
+
+.profile-field__content {
+    display: inline-block;
+    border-radius: .5rem;
+    background-color: wheat;
+    min-width: 10vw;
+    min-height: 2rem;
+    line-height: 2rem;
+}
+
+nav.profile_linked_info ul {
+    display: flex;
+
+    > * {
+        margin-right: 2rem;
+    }
+}

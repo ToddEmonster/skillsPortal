@@ -23,7 +23,7 @@ Encore
     .addStyleEntry('reset', './assets/styles/reset.scss')
     .addEntry('app', './assets/app.js')
     .addEntry('home', './assets/home.js')
-    .addEntry('read_profile', './assets/profile.js')
+    .addStyleEntry('read_profile', './assets/styles/read_profile.scss')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
