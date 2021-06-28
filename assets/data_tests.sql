@@ -47,6 +47,10 @@ INSERT INTO `profile` (`id`, `user_id`, `first_name`, `last_name`, `job_title`, 
 (2, 2, 'Candide', 'Hatt', 'Développeur backend', 'newbie@googl.com', '0100002345', '2021-06-28 01:28:23', '2021-06-28 01:28:23', NULL, NULL, NULL, NULL, 0),
 (3, 4, 'Sylvestre', 'Sanchez', 'Data analyst', 'chaise@teck.ch', '0100002345', '2021-06-28 01:32:23', '2021-06-28 01:34:00', NULL, NULL, NULL, NULL, 1);
 
+-- Update users to match profiles --
+UPDATE `user` SET `profile_id` = '1' WHERE `user`.`id` = 1;
+UPDATE `user` SET `profile_id` = '2' WHERE `user`.`id` = 2;
+UPDATE `user` SET `profile_id` = '3' WHERE `user`.`id` = 5;
 
 -- COMPANIES --
 --
