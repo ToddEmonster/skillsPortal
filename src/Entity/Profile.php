@@ -94,6 +94,7 @@ class Profile
 
     /**
      * @ORM\Column(type="boolean")
+     *
      */
     private $isCollaborator;
 

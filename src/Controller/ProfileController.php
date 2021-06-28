@@ -35,7 +35,7 @@ class ProfileController extends AbstractController
      *     name="profiles"
      * )
      */
-    public function index(LoggerInterface $logger): Response
+    public function index(): Response
     {
         $profiles = $this->entityManager->getRepository(Profile::class)->findAll();
 
