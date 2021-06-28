@@ -47,7 +47,7 @@ class ProfileController extends AbstractController
 
     /**
      * @Route(
-     *     "/profile/{id}",
+     *     "/profile/{id}", "/profile/{id}#skills",
      *     name="read_profile",
      *     methods={"GET"},
      *     requirements={"id"="\d+"}
@@ -63,10 +63,29 @@ class ProfileController extends AbstractController
             'profile/read_profile.html.twig', [
             'controller_name' => 'ProfileController',
             'profile' => $profile,
-            'experiences' => $experiences,
         ]);
     }
 
+    /**
+     * @Route(
+     *     "/profile/{id}#experiences",
+     *     name="read_profile_experiences",
+     *     methods={"GET"},
+     *     requirements={"id"="\d+"}
+     * )
+     */
+    public function read_experiences(int $id): Response
+    {
+        // id is the USER id not the PROFILE id
+        $profile = $this->entityManager->getRepository(Profile::class)->findOneByUser($id);
+        $experiences = $this->entityManager->getRepository(Experience::class)->findBy(["profile"=>$profile]);
+
+        return $this->render(
+            'profile/read_profile.html.twig', [
+            'profile' => $profile,
+            'experiences' => $experiences,
+        ]);
+    }
     /**
      * @Route(
      *     "/profile/{id}/edit",

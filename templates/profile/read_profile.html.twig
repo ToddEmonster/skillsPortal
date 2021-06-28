@@ -6,6 +6,8 @@
 {% endblock %}
 
 {% block body %}
+    {% set currentTab = 'skills' %}
+
     <section class="main-content">
 
         <a class="button__edit-profile" href="{{ path("profile_edit", {id: app.user.id}, false) }}">Editer le profil</a>
@@ -56,15 +58,30 @@
             </div>
 
             <div class="info-details">
-            <nav class="profile_linked_info">
-                <ul>
-                    <li><a>Compétences</a></li>
-                    <li><a>Historique des missions</a></li>
-                    <li><a>Fichiers</a></li>
-                </ul>
-            </nav>
-            <div class="info-details"></div>
-        </div>
+                <nav class="profile_more-info__navbar">
+                    <ul>
+                        <li class="profile-info__navlink"><a onclick="{% set currentTab = 'skills' %}">Compétences</a></li>
+                        <li class="profile-info__navlink">
+                            <a onclick="{% set currentTab = 'experiences' %}">
+                                Historique des missions
+                            </a>
+                        </li>
+                        <li class="profile-info__navlink"><a onclick="{% set currentTab = 'files' %}">Fichiers</a></li>
+                    </ul>
+                </nav>
+                <div class="profile_more-info__content">
+                    <h3>Contenu qui manque :-)</h3>
+{#                    {% if attribute(currentTab) is same as('skills') %}#}
+{#                        <h3>Tab Compétences</h3>#}
+{#                    {% endif %}#}
+{#                    {% if currentTab is same as('experiences') %}#}
+{#                        <h3>Tab Missions</h3>#}
+{#                    {% endif %}#}
+{#                    {% if currentTab is same as('files') %}#}
+{#                        <h3>Tab Fichiers</h3>#}
+{#                    {% endif %}#}
+                </div>
+            </div>
         </div>
     </section>
     <nav class="sidenav"></nav>
